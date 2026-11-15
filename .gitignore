@@ -1,0 +1,21 @@
+# Build
+target/
+
+# Secrets - never commit
+.env
+*.p12
+*.jks
+
+# IDE
+.vscode/*
+!.vscode/settings.json
+!.vscode/launch.json
+.idea/
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log

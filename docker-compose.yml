@@ -1,0 +1,29 @@
+services:
+  oracle:
+    image: gvenzl/oracle-free:23-slim
+    container_name: vault-ai-oracle
+    ports:
+      - "1521:1521"
+    environment:
+      ORACLE_PASSWORD: ${ORACLE_SYS_PASSWORD}
+      VAULT_AUTH_DB_PASSWORD: ${VAULT_AUTH_DB_PASSWORD}
+      VAULT_APP_DB_PASSWORD: ${VAULT_APP_DB_PASSWORD}
+    volumes:
+      - oracle-data:/opt/oracle/oradata
+      - ./docker/oracle-init:/container-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD", "healthcheck.sh"]
+      interval: 10s
+      timeout: 5s
+      retries: 30
+      start_period: 30s
+
+  mailpit:
+    image: axllent/mailpit:latest
+    container_name: vault-ai-mailpit
+    ports:
+      - "1025:1025"   # SMTP used by the applications
+      - "8025:8025"   # Web UI: http://localhost:8025
+
+volumes:
+  oracle-data:

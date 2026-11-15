@@ -1,0 +1,3 @@
+spring:
+  application:
+    name: valut-ai-auth-server
