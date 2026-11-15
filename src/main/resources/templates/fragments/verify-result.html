@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Email verification')}"></head>
+<body>
+<main class="card">
+    <div th:replace="~{fragments/layout :: brand}"></div>
+
+    <th:block th:switch="${status}">
+        <th:block th:case="'success'">
+            <h1>Email confirmed</h1>
+            <div class="alert alert-success">Your account is active. You can now sign in.</div>
+            <a class="btn-primary" th:href="${frontendUrl}">Go to Vault AI</a>
+        </th:block>
+
+        <th:block th:case="'expired'">
+            <h1>Link expired</h1>
+            <div class="alert alert-error">This confirmation link has expired.</div>
+            <p class="subtitle">Register again with the same email and we will send you a new link.</p>
+            <a class="btn-primary" th:href="@{/register}">Register again</a>
+        </th:block>
+
+        <th:block th:case="*">
+            <h1>Invalid link</h1>
+            <div class="alert alert-error">This confirmation link is invalid or has already been used.</div>
+            <a class="btn-primary" th:href="${frontendUrl}">Go to Vault AI</a>
+        </th:block>
+    </th:block>
+</main>
+</body>
+</html>

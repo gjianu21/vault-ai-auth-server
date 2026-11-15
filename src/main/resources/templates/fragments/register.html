@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Create account')}"></head>
+<body>
+<main class="card">
+    <div th:replace="~{fragments/layout :: brand}"></div>
+    <h1>Create your account</h1>
+    <p class="subtitle">We will send you a link to confirm your email.</p>
+
+    <div class="alert alert-error" th:if="${param.blocked}">
+        Too many attempts. Please wait a minute and try again.
+    </div>
+
+    <form th:action="@{/register}" th:object="${form}" method="post" class="form" novalidate>
+        <label for="email">Email</label>
+        <input id="email" type="email" th:field="*{email}" autocomplete="email" required>
+        <p class="field-error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
+
+        <label for="password">Password</label>
+        <input id="password" type="password" th:field="*{password}" autocomplete="new-password" required>
+        <p class="hint">At least 8 characters.</p>
+        <p class="field-error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
+        <p class="field-error" th:if="${#fields.hasErrors('passwordDifferentFromEmail')}"
+           th:errors="*{passwordDifferentFromEmail}"></p>
+
+        <label for="confirmPassword">Confirm password</label>
+        <input id="confirmPassword" type="password" th:field="*{confirmPassword}" autocomplete="new-password" required>
+        <p class="field-error" th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}"></p>
+        <p class="field-error" th:if="${#fields.hasErrors('passwordConfirmed')}" th:errors="*{passwordConfirmed}"></p>
+
+        <button type="submit" class="btn-primary">Create account</button>
+    </form>
+
+    <div class="links">
+        <a th:href="@{/login}">Already have an account? Sign in</a>
+    </div>
+</main>
+</body>
+</html>

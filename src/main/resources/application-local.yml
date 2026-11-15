@@ -1,0 +1,17 @@
+spring:
+  thymeleaf:
+    cache: false
+  jpa:
+    show-sql: true
+
+app:
+  jwk:
+    generate-if-missing: true
+  test-user:
+    email: test@vault-ai.local
+    password: Password123!
+
+logging:
+  level:
+    org.springframework.security: DEBUG
+    com.vaultai: DEBUG

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="005-create-oauth2-authorization" author="jianu">
+        <createTable tableName="oauth2_authorization">
+            <column name="id" type="VARCHAR2(100)">
+                <constraints primaryKey="true" primaryKeyName="pk_oauth2_authorization" nullable="false"/>
+            </column>
+            <column name="registered_client_id" type="VARCHAR2(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="principal_name" type="VARCHAR2(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="state_value" type="VARCHAR2(500)"/>
+            <column name="authorization_code_value" type="VARCHAR2(4000)"/>
+            <column name="access_token_value" type="VARCHAR2(4000)"/>
+            <column name="refresh_token_value" type="VARCHAR2(4000)"/>
+            <column name="oidc_id_token_value" type="VARCHAR2(4000)"/>
+            <column name="expires_at" type="TIMESTAMP(6) WITH TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="authorization_data" type="BLOB">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="005-create-oauth2-authorization-indexes" author="jianu">
+        <createIndex tableName="oauth2_authorization" indexName="ix_oauth2_auth_principal">
+            <column name="principal_name"/>
+        </createIndex>
+        <createIndex tableName="oauth2_authorization" indexName="ix_oauth2_auth_state">
+            <column name="state_value"/>
+        </createIndex>
+        <createIndex tableName="oauth2_authorization" indexName="ix_oauth2_auth_code">
+            <column name="authorization_code_value"/>
+        </createIndex>
+        <createIndex tableName="oauth2_authorization" indexName="ix_oauth2_auth_access_token">
+            <column name="access_token_value"/>
+        </createIndex>
+        <createIndex tableName="oauth2_authorization" indexName="ix_oauth2_auth_refresh_token">
+            <column name="refresh_token_value"/>
+        </createIndex>
+        <createIndex tableName="oauth2_authorization" indexName="ix_oauth2_auth_expires_at">
+            <column name="expires_at"/>
+        </createIndex>
+    </changeSet>
+</databaseChangeLog>

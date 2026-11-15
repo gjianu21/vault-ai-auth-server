@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Check your email')}"></head>
+<body>
+<main class="card">
+    <div th:replace="~{fragments/layout :: brand}"></div>
+    <h1>Check your email</h1>
+    <p class="subtitle">
+        If this email address can be used, we have sent you a link to confirm your account.
+        Open it to activate your account, then sign in.
+    </p>
+    <p class="hint">Didn't get the email? Check your spam folder, or try again in a few minutes.</p>
+    <a class="btn-primary" th:href="${frontendUrl}">Go to Vault AI</a>
+</main>
+</body>
+</html>

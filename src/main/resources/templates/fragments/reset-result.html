@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Password reset')}"></head>
+<body>
+<main class="card">
+    <div th:replace="~{fragments/layout :: brand}"></div>
+
+    <th:block th:switch="${status}">
+        <th:block th:case="'success'">
+            <h1>Password changed</h1>
+            <div class="alert alert-success">
+                Your password was changed and you were signed out on all devices.
+            </div>
+            <a class="btn-primary" th:href="${frontendUrl}">Go to Vault AI</a>
+        </th:block>
+
+        <th:block th:case="'expired'">
+            <h1>Link expired</h1>
+            <div class="alert alert-error">This reset link has expired.</div>
+            <a class="btn-primary" th:href="@{/forgot-password}">Request a new link</a>
+        </th:block>
+
+        <th:block th:case="'blocked'">
+            <h1>Too many attempts</h1>
+            <div class="alert alert-error">Please wait a minute, then open the link from your email again.</div>
+        </th:block>
+
+        <th:block th:case="*">
+            <h1>Invalid link</h1>
+            <div class="alert alert-error">This reset link is invalid or has already been used.</div>
+            <a class="btn-primary" th:href="@{/forgot-password}">Request a new link</a>
+        </th:block>
+    </th:block>
+</main>
+</body>
+</html>
