@@ -10,4 +10,5 @@
     <include file="changes/003-spring-session.xml" relativeToChangelogFile="true"/>
     <include file="changes/004-oauth2-registered-client.xml" relativeToChangelogFile="true"/>
     <include file="changes/005-oauth2-authorization.xml" relativeToChangelogFile="true"/>
+    <include file="changes/006-promote-users-to-rm.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>

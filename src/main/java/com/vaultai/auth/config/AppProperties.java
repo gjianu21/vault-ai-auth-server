@@ -21,6 +21,7 @@ public record AppProperties(
         @NotBlank String frontendUrl,
         @NotBlank String backendUrl,
         @NotBlank String mailFrom,
+        boolean mailLogOnly,
         @NotBlank String internalApiKey,
         @Valid @NotNull OAuth2 oauth2,
         @Valid @NotNull Jwk jwk,

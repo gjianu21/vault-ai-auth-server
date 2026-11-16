@@ -18,10 +18,10 @@ import com.vaultai.auth.util.EmailNormalizer;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-/** Creates a verified test user on the "local" profile only. */
+/** Creates a verified test user on the "local" and "demo" profiles only. */
 @Slf4j
 @Component
-@Profile("local")
+@Profile({"local", "demo"})
 @RequiredArgsConstructor
 public class LocalTestUserSeeder implements ApplicationRunner {
 
@@ -45,7 +45,7 @@ public class LocalTestUserSeeder implements ApplicationRunner {
         userRepository.save(AppUser.builder()
                 .email(email)
                 .passwordHash(passwordEncoder.encode(testUser.password()))
-                .role(Role.CUSTOMER)
+                .role(Role.RELATIONSHIP_MANAGER)
                 .enabled(true)
                 .createdAt(Instant.now())
                 .build());
