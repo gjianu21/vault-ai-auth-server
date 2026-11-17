@@ -5,6 +5,7 @@ spring:
     show-sql: true
 
 app:
+  mail-log-only: true
   jwk:
     generate-if-missing: true
   test-user:

@@ -7,7 +7,9 @@ import org.springframework.stereotype.Service;
 import com.vaultai.auth.config.AppProperties;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class EmailSender {
@@ -62,6 +64,12 @@ public class EmailSender {
     }
 
     private void send(String to, String subject, String body) {
+        if (properties.mailLogOnly()) {
+            // local development: no SMTP server, the link is copied from the log
+            log.info("[MAIL NOT SENT] to={} subject={}\n{}", to, subject, body);
+            return;
+        }
+
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom(properties.mailFrom());
         message.setTo(to);

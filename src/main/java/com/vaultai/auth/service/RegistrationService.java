@@ -76,7 +76,7 @@ public class RegistrationService {
             user = AppUser.builder()
                     .email(email)
                     .passwordHash(passwordEncoder.encode(rawPassword))
-                    .role(Role.CUSTOMER)
+                    .role(Role.RELATIONSHIP_MANAGER)
                     .enabled(false)
                     .createdAt(Instant.now())
                     .build();
